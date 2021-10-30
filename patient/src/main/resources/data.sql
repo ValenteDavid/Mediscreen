@@ -1,5 +1,5 @@
 INSERT INTO `patient`
-(`firstName`,`lastName`,`dob`,`sex`,`address`,`phone`)
+(`first_name`,`last_name`,`dob`,`sex`,`address`,`phone`)
 VALUES
 ("Test","TestNone","1966-12-31","F","1 Brookside St","100-222-3333"),
 ("Test","TestBorderline","1945-06-24","M","2 High St","200-333-4444"),
