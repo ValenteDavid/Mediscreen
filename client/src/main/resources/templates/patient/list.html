@@ -1,54 +1,59 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8" />
 <title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
-        <header th:insert="header.html :: header">...</header>
-        
-        <div class="row">
-       <div class="col-10">
-        <h2>Patient</h2>
-       </div>
-       <div class="col-2">
-      <a href="#" class="btn btn-primary btn-sm">Add a new patient</a>
-       </div>
-        </div>
-        <div class="row">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Last Name</th>
-                        <th>First Name</th>
-                        <th>Date of birth</th>
-                        <th>Sex</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="patient : ${patients}">
-                        <td style="width: 10%" th:text="${patient.lastName}"></td>
-                        <td th:text="${patient.firstName}"></td>
-                        <td th:text="${patient.dob}"></td>
-                        <td th:text="${patient.sex}"></td>
-                        <td th:text="${patient.address}"></td>
-                        <td th:text="${patient.phone}"></td>
-                        <td style="width: 15%" class="text-center">
-                        
-                        <a href="#">Edit</a>
-                        &nbsp;|&nbsp;
-                        <a href="#">Delete</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+	<div class="container">
+		<header th:insert="header.html :: header">...</header>
+
+		<div class="row">
+			<div class="col-10">
+				<h2>Patients</h2>
+			</div>
+			<div class="col-2">
+				<a href="#" class="btn btn-primary btn-sm">Add a new patient</a>
+			</div>
+		</div>
+		<div class="row">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Last Name</th>
+						<th>First Name</th>
+						<th>Date of birth</th>
+						<th>Sex</th>
+						<th>Address</th>
+						<th>Phone</th>
+						<th>Historic</th>
+						<th>Edit</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="patient : ${patients}">
+						<td style="width: 10%" th:text="${patient.lastName}"></td>
+						<td th:text="${patient.firstName}"></td>
+						<td th:text="${patient.dob}"></td>
+						<td th:text="${patient.sex}"></td>
+						<td th:text="${patient.address}"></td>
+						<td th:text="${patient.phone}"></td>
+						<td style="width: 5%" class="text-center">
+						<a href="#">
+                        <img src="/icon/historic.png" />
+                        </a>
+						</td>
+						<td style="width: 5%" class="text-center">
+						<a href="#"> 
+						<img src="/icon/edit.png" />
+						</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 </html>
