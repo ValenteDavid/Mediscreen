@@ -1,4 +1,4 @@
-package com.tourguide.patient.unit;
+package com.mediscreen.patient.unit;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.when;
@@ -17,9 +17,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.tourguide.patient.dao.PatientDao;
-import com.tourguide.patient.domain.Patient;
-import com.tourguide.patient.domain.Sex;
+import com.mediscreen.patient.dao.PatientDao;
+import com.mediscreen.patient.domain.Patient;
+import com.mediscreen.patient.domain.Sex;
 
 @WebMvcTest
 @AutoConfigureMockMvc

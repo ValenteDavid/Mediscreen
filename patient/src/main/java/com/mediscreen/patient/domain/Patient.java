@@ -1,4 +1,4 @@
-package com.tourguide.patient.domain;
+package com.mediscreen.patient.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

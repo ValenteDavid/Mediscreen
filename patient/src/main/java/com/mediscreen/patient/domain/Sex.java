@@ -1,4 +1,4 @@
-package com.tourguide.patient.domain;
+package com.mediscreen.patient.domain;
 
 /**
  * Enum Sex M or F

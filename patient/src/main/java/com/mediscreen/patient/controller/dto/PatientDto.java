@@ -1,6 +1,6 @@
-package com.tourguide.patient.controller.dto;
+package com.mediscreen.patient.controller.dto;
 
-import com.tourguide.patient.domain.Patient;
+import com.mediscreen.patient.domain.Patient;
 
 /**
  * Patient dto

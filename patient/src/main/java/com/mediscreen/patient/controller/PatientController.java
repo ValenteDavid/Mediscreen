@@ -1,4 +1,4 @@
-package com.tourguide.patient.controller;
+package com.mediscreen.patient.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tourguide.patient.controller.dto.PatientDto;
-import com.tourguide.patient.dao.PatientDao;
-import com.tourguide.patient.domain.Patient;
+import com.mediscreen.patient.controller.dto.PatientDto;
+import com.mediscreen.patient.dao.PatientDao;
+import com.mediscreen.patient.domain.Patient;
 
 /**
  * Patient Controller

@@ -1,9 +1,9 @@
-package com.tourguide.patient.dao;
+package com.mediscreen.patient.dao;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.tourguide.patient.domain.Patient;
+import com.mediscreen.patient.domain.Patient;
 
 /**
  * Patient Dao

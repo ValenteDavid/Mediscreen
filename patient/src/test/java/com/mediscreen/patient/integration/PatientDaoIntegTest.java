@@ -1,4 +1,4 @@
-package com.tourguide.patient.integration;
+package com.mediscreen.patient.integration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.tourguide.patient.dao.PatientDao;
-import com.tourguide.patient.domain.Patient;
+import com.mediscreen.patient.dao.PatientDao;
+import com.mediscreen.patient.domain.Patient;
 
 @SpringBootTest
 public class PatientDaoIntegTest {
