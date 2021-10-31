@@ -50,6 +50,15 @@ public class PatientControllerUnitTest {
 				.andExpect(jsonPath("$.address").doesNotExist())
 				.andExpect(jsonPath("$.phone").doesNotExist());
 	}
+	
+	@Test
+	public void getPatientTest_isNotFound() throws Exception {
+		Integer id = 1;
+		when(patientDao.findById(id)).thenReturn(Optional.empty());
+
+		mockMvc.perform(get("/patient/{0}", id))
+				.andExpect(status().isNotFound());
+	}
 
 	@Test
 	public void getPatientAllTest_isOk() throws Exception {

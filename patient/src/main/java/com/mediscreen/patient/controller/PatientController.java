@@ -7,13 +7,17 @@ import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.mediscreen.patient.controller.dto.PatientDto;
 import com.mediscreen.patient.dao.PatientDao;
 import com.mediscreen.patient.domain.Patient;
+
+import javassist.NotFoundException;
 
 /**
  * Patient Controller
@@ -36,13 +40,14 @@ public class PatientController {
 	 * 
 	 * @param id patient id
 	 * @return the patient at this id
+	 * @throws NotFoundException 
 	 * @see PatientDto
 	 * @see Patient
 	 */
 	@GetMapping("/patient" + "/{id}")
 	public PatientDto getPatientById(@PathVariable Integer id) {
 		log.info("Call /patient, param : { id : " + id + "}");
-		PatientDto patientDto = PatientDto.convertToDto(patientDao.findById(id).get());
+		PatientDto patientDto = PatientDto.convertToDto(patientDao.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find patient")));
 		log.info("Response /patient  : " + patientDto);
 		return patientDto;
 	}
