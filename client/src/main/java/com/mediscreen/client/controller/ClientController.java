@@ -9,9 +9,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.mediscreen.client.proxies.PatientProxy;
 
+/**
+ * Client controller
+ * @author David
+ *
+ */
 @Controller
 public class ClientController {
 	
+	/**
+	 * @see PatientProxy
+	 */
 	@Autowired
 	private PatientProxy patientProxy;
 
