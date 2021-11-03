@@ -1,18 +1,25 @@
 package com.mediscreen.patient.controller.dto;
 
+import javax.validation.constraints.NotNull;
+
 import com.mediscreen.patient.domain.Patient;
 
 /**
  * Patient dto
+ * 
  * @author David
  *
  */
 public class PatientDto {
 
 	private Integer id;
+	@NotNull
 	private String firstName;
+	@NotNull
 	private String lastName;
+	@NotNull
 	private String dob;
+	@NotNull
 	private String sex;
 	private String address;
 	private String phone;
@@ -89,6 +96,7 @@ public class PatientDto {
 
 	/**
 	 * Convert to Dto
+	 * 
 	 * @param patient
 	 * @return PatientDto from the patient
 	 * @see Patient
@@ -100,8 +108,28 @@ public class PatientDto {
 				patient.getLastName(),
 				patient.getDob(),
 				patient.getSex(),
-				patient.getAddress(), 
+				patient.getAddress(),
 				patient.getPhone());
+	}
+
+	/*
+	 * Convert to Domain
+	 * 
+	 * @param patient
+	 * 
+	 * @return PatientDto from the patient
+	 * 
+	 * @see Patient
+	 */
+	public static Patient convertToDomain(PatientDto patientDto) {
+		return new Patient(
+				patientDto.getId(),
+				patientDto.getFirstName(),
+				patientDto.getLastName(),
+				patientDto.getDob(),
+				patientDto.getSex(),
+				patientDto.getAddress(),
+				patientDto.getPhone());
 	}
 
 	@Override
@@ -109,5 +137,5 @@ public class PatientDto {
 		return "PatientDto [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob
 				+ ", sex=" + sex + ", address=" + address + ", phone=" + phone + "]";
 	}
-	
+
 }

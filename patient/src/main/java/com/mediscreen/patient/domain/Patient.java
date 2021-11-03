@@ -40,10 +40,10 @@ public class Patient {
 	private String lastName;
 	
 	/**
-	 * Patient date of birth
+	 * Patient String of birth
 	 */
 	@Column(nullable = false)
-	@NotNull(message = "Date of birth cannot be empty")
+	@NotNull(message = "String of birth cannot be empty")
 	private String dob;
 	
 	/**

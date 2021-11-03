@@ -1,5 +1,10 @@
 package com.mediscreen.client.controller.dto;
 
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+
 /**
  * Patient dto
  * @author David
@@ -7,10 +12,16 @@ package com.mediscreen.client.controller.dto;
  */
 public class PatientDto {
 
+	@NumberFormat
 	private Integer id;
+	@NotNull
 	private String firstName;
+	@NotNull
 	private String lastName;
+	@NotNull
+	@DateTimeFormat
 	private String dob;
+	@NotNull
 	private String sex;
 	private String address;
 	private String phone;

@@ -19,5 +19,14 @@ public enum Sex {
 	public String getFormat() {
 		return format;
 	}
+	
+	public static boolean findExist(String formatExist) {
+		for (Sex sex : Sex.values()) {
+			if (sex.format.equals(formatExist)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
