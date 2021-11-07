@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * Patient
@@ -29,21 +29,21 @@ public class Patient {
 	 * Patient first name
 	 */
 	@Column(name = "first_name", nullable = false)
-	@NotNull(message = "First name cannot be empty")
+	@NotEmpty(message = "First name cannot be empty")
 	private String firstName;
 	
 	/**
 	 * Patien last name
 	 */
 	@Column(name = "last_name",nullable = false)
-	@NotNull(message = "Last name cannot be empty")
+	@NotEmpty(message = "Last name cannot be empty")
 	private String lastName;
 	
 	/**
 	 * Patient String of birth
 	 */
 	@Column(nullable = false)
-	@NotNull(message = "String of birth cannot be empty")
+	@NotEmpty(message = "Date of birth cannot be empty")
 	private String dob;
 	
 	/**
@@ -51,7 +51,7 @@ public class Patient {
 	 * @see Sex
 	 */
 	@Column(nullable = false)
-	@NotNull(message = "Sex cannot be empty")
+	@NotEmpty(message = "Sex cannot be empty")
 	private String sex;
 	
 	/**

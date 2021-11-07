@@ -1,6 +1,6 @@
 package com.mediscreen.patient.controller.dto;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 import com.mediscreen.patient.domain.Patient;
 
@@ -13,13 +13,13 @@ import com.mediscreen.patient.domain.Patient;
 public class PatientDto {
 
 	private Integer id;
-	@NotNull
+	@NotEmpty
 	private String firstName;
-	@NotNull
+	@NotEmpty
 	private String lastName;
-	@NotNull
+	@NotEmpty
 	private String dob;
-	@NotNull
+	@NotEmpty
 	private String sex;
 	private String address;
 	private String phone;

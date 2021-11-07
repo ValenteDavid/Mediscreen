@@ -83,14 +83,14 @@ public class PatientController {
 	}
 
 	@PutMapping("/patient" + "/{id}")
-	public PatientDto updatePatient(@PathVariable Integer id,@Valid @RequestBody PatientDto patientdto,HttpServletResponse response,Model model,BindingResult result) {
-		log.info("Call /patient, param : { id : " + id + ", patientdto : " + patientdto + "}");
+	public PatientDto updatePatient(@PathVariable Integer id,@Valid @RequestBody PatientDto patientDto,HttpServletResponse response,Model model,BindingResult result) {
+		log.info("Call /patient, param : { id : " + id + ", patientdto : " + patientDto + "}");
 		log.debug("Control : id");
 		PatientDto patientOrigine = PatientDto.convertToDto(patientDao.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find patient")));
 		log.debug("Control OK : id");
 		
 		log.debug("Control : sex");
-		if (!Sex.findExist(patientdto.getSex())){
+		if (!Sex.findExist(patientDto.getSex())){
 			log.debug("Control ERROR: sex");
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return patientOrigine;
@@ -101,7 +101,7 @@ public class PatientController {
 		sdf.setLenient(false);
 		try {
 			log.debug("Control : dob");
-			sdf.parse(patientdto.getDob());
+			sdf.parse(patientDto.getDob());
 		}catch (ParseException e) {
 			log.debug("Control ERROR : dob");
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -110,11 +110,11 @@ public class PatientController {
 		}
 		log.debug("Control OK : dob");
 		
-		Patient patient = PatientDto.convertToDomain(patientdto);
+		Patient patient = PatientDto.convertToDomain(patientDto);
 		log.debug(patient.toString());
-		patientdto = PatientDto.convertToDto(patientDao.save(patient));
-		log.info("Response /patient  : " + patientdto);
-		return patientdto;
+		patientDto = PatientDto.convertToDto(patientDao.save(patient));
+		log.info("Response /patient  : " + patientDto);
+		return patientDto;
 	}
 
 }

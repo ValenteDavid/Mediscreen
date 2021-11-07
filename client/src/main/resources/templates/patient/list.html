@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8" />
-<title>Home</title>
+<title>Patients</title>
 <link rel="stylesheet" href="../../css/bootstrap.min.css">
 </head>
 <body>
@@ -21,7 +20,7 @@
 		<div class="row">
 			<table class="table table-bordered">
 				<thead>
-					<tr bgcolor=#525252 style="color:#FFFFFF">
+					<tr bgcolor=#525252 style="color: #FFFFFF">
 						<th>Last Name</th>
 						<th>First Name</th>
 						<th>Date of birth</th>
@@ -41,14 +40,14 @@
 						<td th:text="${patient.address}"></td>
 						<td th:text="${patient.phone}"></td>
 						<td style="width: 5%" class="text-center">
-						<a href="#">
-                        <img src="/icon/historic.png" />
-                        </a>
+							<a href="#">
+								<img src="/icon/historic.png" />
+							</a>
 						</td>
 						<td style="width: 5%" class="text-center">
-						<a href="#"> 
-						<img src="/icon/edit.png" />
-						</a>
+							<a th:href="@{/patient/update/{id}(id=${patient.id})}">
+								<img src="/icon/edit.png" />
+							</a>
 						</td>
 					</tr>
 				</tbody>

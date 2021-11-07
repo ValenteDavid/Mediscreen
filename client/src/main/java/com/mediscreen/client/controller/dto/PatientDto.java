@@ -1,6 +1,6 @@
 package com.mediscreen.client.controller.dto;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
@@ -14,14 +14,14 @@ public class PatientDto {
 
 	@NumberFormat
 	private Integer id;
-	@NotNull
+	@NotEmpty(message = "First name cannot be empty")
 	private String firstName;
-	@NotNull
+	@NotEmpty(message = "Last name cannot be empty")
 	private String lastName;
-	@NotNull
-	@DateTimeFormat
+	@NotEmpty(message = "Date of birth cannot be empty")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private String dob;
-	@NotNull
+	@NotEmpty(message = "Sex cannot be empty")
 	private String sex;
 	private String address;
 	private String phone;
