@@ -69,6 +69,22 @@ public class ClientController {
 		log.info("Return /patient/update/" + id + " : patient/add_update ");
 		return "patient/add_update";
 	}
+	
+	/*
+	 * Show UI add patient
+	 * 
+	 * @param id : patient id
+	 * @return UI and attribute
+	 */
+	@GetMapping("/patient/add")
+	public String showAddPatient(Model model, HttpServletRequest httpServletRequest) {
+		log.info("Call /patient/add");
+		addAttribute(model);
+		model.addAttribute("patientDto", new PatientDto());
+		log.debug("Attribute { patientDto : " + model.getAttribute("patientDto") + " }");
+		log.info("Return /patient/add" + " : patient/add_update ");
+		return "patient/add_update";
+	}
 
 	/**
 	 * Validate data after send edit or save patient
@@ -96,18 +112,25 @@ public class ClientController {
 
 		if (!result.hasErrors()) {
 			try {
-				log.debug("Send update");
-				patientProxy.updatePatient(patientDto.getId(), patientDto);
+				log.debug("Send add");
+				patientProxy.addPatient(patientDto);
 				return "redirect:/patient/list";
 			}
 			catch (Exception e) {
-				log.warn("Update patient return error");
+				log.warn("Add patient return error");
 				return redirectSaveUpdate(patientDto, model);
 			}
 		} else {
 			log.info("Return /patient/validate : " + "redirect:/patient/" + patientDto.getId());
 			return redirectSaveUpdate(patientDto, model);
 		}
+	}
+	
+	private Model addAttribute(Model model) {
+		model.addAttribute("title", "Add patient");
+		model.addAttribute("titleForm", "Add patient");
+		model.addAttribute("titleButton", "Add");
+		return model;
 	}
 
 	private Model updateAttribute(Model model) {
@@ -122,8 +145,8 @@ public class ClientController {
 			updateAttribute(model);
 			return "patient/add_update";
 		} else {
-			// TODO Story 3
-			return null;
+			addAttribute(model);
+			return "patient/add_update";
 		}
 	}
 

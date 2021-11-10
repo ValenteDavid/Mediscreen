@@ -18,8 +18,26 @@ public class ClientControllerIntegTest {
 	
 	@Test
 	public void showPatientListTest() throws Exception {
-		mockMvc.perform(get("/patients"))
+		mockMvc.perform(get("/patient/list"))
 		.andExpect(model().attributeExists("patients"))
+		.andExpect(status().isOk());
+	}
+	
+	@Test
+	public void showUpdatePatientTest() throws Exception {
+		mockMvc.perform(get("/patient/update/{0}",1))
+		.andExpect(model().attribute("title","Edit patient"))
+		.andExpect(model().attribute("titleForm","Edit patient"))
+		.andExpect(model().attribute("titleButton","Edit"))
+		.andExpect(status().isOk());
+	}
+	
+	@Test
+	public void showAddPatientTest() throws Exception {
+		mockMvc.perform(get("/patient/add"))
+		.andExpect(model().attribute("title","Add patient"))
+		.andExpect(model().attribute("titleForm","Add patient"))
+		.andExpect(model().attribute("titleButton","Add"))
 		.andExpect(status().isOk());
 	}
 }

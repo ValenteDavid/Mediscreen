@@ -34,9 +34,23 @@ public class ClientControllerUnitTest {
 		patientList.add(new PatientDto(1,"firstName", "lastName", "2021-01-01","F","address","000-111-222"));
 		when(patientProxy.getAllPatient()).thenReturn(patientList);
 		
-		mockMvc.perform(get("/patients"))
+		mockMvc.perform(get("/patient/list"))
 		.andExpect(model().attributeExists("patients"))
 		.andExpect(status().isOk());
 	}
-
+	
+	@Test
+	public void showUpdatePatientTest() throws Exception {
+		Integer id = 1;
+		when(patientProxy.getPatientById(id)).thenReturn(new PatientDto(1,"firstName", "lastName", "2021-01-01","F","address","000-111-222"));
+		mockMvc.perform(get("/patient/update/{0}",id))
+		.andExpect(status().isOk());
+	}
+	
+	@Test
+	public void showAddPatientTest() throws Exception {
+		mockMvc.perform(get("/patient/add"))
+		.andExpect(status().isOk());
+	}
 }
+
