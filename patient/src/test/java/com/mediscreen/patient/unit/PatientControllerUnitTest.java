@@ -4,6 +4,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -71,7 +72,7 @@ public class PatientControllerUnitTest {
 		patientList.add(new Patient(1, "Test", "TestNone", "2021-01-01", Sex.MALE.getFormat()));
 		when(patientDao.findAll()).thenReturn(patientList);
 
-		mockMvc.perform(get("/patients"))
+		mockMvc.perform(get("/patient/list"))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$", hasSize(1)));
 	}
@@ -102,18 +103,14 @@ public class PatientControllerUnitTest {
 		Patient patient = new Patient(id, "FirsName", "LastName", "2021-01-01", "M","address","");
 		PatientDto patientDto = PatientDto.convertToDto(patient);
 		when(patientDao.findById(id)).thenReturn(Optional.empty());
+		
+		String body = new ObjectMapper().writeValueAsString(patientDto);
 
 		mockMvc.perform(put("/patient/{0}", id)
-				.param("id", patientDto.getId().toString())
-				.param("firstName", patientDto.getFirstName().toString())
-				.param("lastName",  patientDto.getLastName().toString())
-				.param("dob", patientDto.getDob().toString())
-				.param("sex",  patientDto.getSex().toString())
-				.param("address", patientDto.getAddress().toString())
-				.param("phone", patientDto.getPhone().toString())
+				.content(body)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isBadRequest());
+				.andExpect(status().isNotFound());
 	}
 
 	@Test
@@ -124,15 +121,11 @@ public class PatientControllerUnitTest {
 		Patient patient = new Patient(id, "FirsName", "LastName", "2021-01-01", "MMM","","");
 		PatientDto patientDto = PatientDto.convertToDto(patient);
 		when(patientDao.findById(id)).thenReturn(Optional.of(patientOrigine));
+		
+		String body = new ObjectMapper().writeValueAsString(patientDto);
 
 		mockMvc.perform(put("/patient/{0}", id)
-				.param("id", patientDto.getId().toString())
-				.param("firstName", patientDto.getFirstName().toString())
-				.param("lastName",  patientDto.getLastName().toString())
-				.param("dob", patientDto.getDob().toString())
-				.param("sex",  patientDto.getSex().toString())
-				.param("address", patientDto.getAddress().toString())
-				.param("phone", patientDto.getPhone().toString())
+				.content(body)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isBadRequest());
@@ -146,15 +139,54 @@ public class PatientControllerUnitTest {
 		Patient patient = new Patient(id, "FirsName", "LastName", "2021-31-31", "M","","");
 		PatientDto patientDto = PatientDto.convertToDto(patient);
 		when(patientDao.findById(id)).thenReturn(Optional.of(patientOrigine));
+		
+		String body = new ObjectMapper().writeValueAsString(patientDto);
 
 		mockMvc.perform(put("/patient/{0}", id)
-				.param("id", patientDto.getId().toString())
-				.param("firstName", patientDto.getFirstName().toString())
-				.param("lastName",  patientDto.getLastName().toString())
-				.param("dob", patientDto.getDob().toString())
-				.param("sex",  patientDto.getSex().toString())
-				.param("address", patientDto.getAddress().toString())
-				.param("phone", patientDto.getPhone().toString())
+				.content(body)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	public void addPatientTest_isOk() throws Exception {
+		Patient patient = new Patient(null, "FirsName", "LastName", "2021-01-01", "M","","");
+		PatientDto patientDto = PatientDto.convertToDto(patient);
+		when(patientDao.save(any())).thenReturn(patient);
+		
+		String body = new ObjectMapper().writeValueAsString(patientDto);
+		
+		mockMvc.perform(post("/patient/add")
+				.content(body)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+	}
+	
+	@Test
+	public void addPatientTest_isBadSex() throws Exception {
+		Patient patient = new Patient(null, "FirsName", "LastName", "2021-01-01", "MMM","","");
+		PatientDto patientDto = PatientDto.convertToDto(patient);
+		
+		String body = new ObjectMapper().writeValueAsString(patientDto);
+
+		mockMvc.perform(post("/patient/add")
+				.content(body)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isBadRequest());
+	}
+
+	@Test
+	public void addPatientTest_isBadDate() throws Exception {
+		Patient patient = new Patient(null, "FirsName", "LastName", "2021-31-31", "M","","");
+		PatientDto patientDto = PatientDto.convertToDto(patient);
+		
+		String body = new ObjectMapper().writeValueAsString(patientDto);
+
+		mockMvc.perform(post("/patient/add")
+				.content(body)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isBadRequest());

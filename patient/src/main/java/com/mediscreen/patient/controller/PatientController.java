@@ -16,9 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -83,17 +83,52 @@ public class PatientController {
 	}
 
 	@PutMapping("/patient" + "/{id}")
-	public PatientDto updatePatient(@PathVariable Integer id,@Valid @RequestBody PatientDto patientDto,HttpServletResponse response,Model model,BindingResult result) {
+	public PatientDto updatePatient(@PathVariable Integer id,@Valid @RequestBody PatientDto patientDto,HttpServletResponse response) {
 		log.info("Call /patient, param : { id : " + id + ", patientdto : " + patientDto + "}");
 		log.debug("Control : id");
 		PatientDto patientOrigine = PatientDto.convertToDto(patientDao.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find patient")));
 		log.debug("Control OK : id");
 		
+		if(!validatePatient(patientDto, response)) {
+			log.info("Response /patient  : " + patientOrigine);
+			return patientOrigine;
+		};
+		
+		Patient patient = PatientDto.convertToDomain(patientDto);
+		log.debug(patient.toString());
+		patientDto = PatientDto.convertToDto(patientDao.save(patient));
+		log.info("Response /patient  : " + patientDto);
+		return patientDto;
+	}
+	
+	@PostMapping("/patient/add")
+	public PatientDto addPatient(@Valid @RequestBody PatientDto patientDto,HttpServletResponse response,Model model,BindingResult result) {
+		log.info("Call /patient/add");
+		
+		if(!validatePatient(patientDto, response)) {
+			return null;
+		};
+		
+		Patient patient = PatientDto.convertToDomain(patientDto);
+		log.debug(patient.toString());
+		patientDto = PatientDto.convertToDto(patientDao.save(patient));
+		log.info("Response /patient/add  : " + patientDto);
+		return patientDto;
+	}
+	
+	/**
+	 * Data validation of Patient
+	 * @param patientDto : patientDto
+	 * @param response
+	 * @return True if all data is valid else false
+	 * @see PatientDto
+	 */
+	private boolean validatePatient(@Valid PatientDto patientDto,HttpServletResponse response) {
 		log.debug("Control : sex");
 		if (!Sex.findExist(patientDto.getSex())){
 			log.debug("Control ERROR: sex");
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			return patientOrigine;
+			return false;
 		}
 		log.debug("Control OK: sex");
 		
@@ -105,16 +140,11 @@ public class PatientController {
 		}catch (ParseException e) {
 			log.debug("Control ERROR : dob");
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			result.addError(new ObjectError("patientdto", "Bad date of birth format, correct format example 2021-01-01"));
-			return patientOrigine;
+			return false;
 		}
 		log.debug("Control OK : dob");
 		
-		Patient patient = PatientDto.convertToDomain(patientDto);
-		log.debug(patient.toString());
-		patientDto = PatientDto.convertToDto(patientDao.save(patient));
-		log.info("Response /patient  : " + patientDto);
-		return patientDto;
+		return true;
 	}
 
 }
