@@ -69,7 +69,7 @@ public class PatientControllerIntegTest {
 	}
 	
 	@Test
-	public void addPatientTest_isOk() throws Exception {
+	public void addPatientTest_isCreated() throws Exception {
 		Patient patient = new Patient(null, "FirsName", "LastName", "2021-01-01", "M","","");
 		PatientDto patientDto = PatientDto.convertToDto(patient);
 		
@@ -79,7 +79,7 @@ public class PatientControllerIntegTest {
 				.content(body)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk());
+				.andExpect(status().isCreated());
 	}
 
 }

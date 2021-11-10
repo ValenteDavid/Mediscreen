@@ -113,6 +113,7 @@ public class PatientController {
 		log.debug(patient.toString());
 		patientDto = PatientDto.convertToDto(patientDao.save(patient));
 		log.info("Response /patient/add  : " + patientDto);
+		response.setStatus(HttpServletResponse.SC_CREATED);
 		return patientDto;
 	}
 	
