@@ -72,7 +72,7 @@ public class PatientController {
 	 * @see PatientDto
 	 * @see Patient
 	 */
-	@GetMapping("/patients")
+	@GetMapping("/patient/list")
 	public List<PatientDto> getAllPatient() {
 		log.info("Call /patients");
 		List<PatientDto> patientDtoList = StreamSupport.stream(patientDao.findAll().spliterator(), false)
