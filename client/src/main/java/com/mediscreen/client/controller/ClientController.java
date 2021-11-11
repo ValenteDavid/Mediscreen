@@ -127,8 +127,8 @@ public class ClientController {
 	}
 	
 	private Model addAttribute(Model model) {
-		model.addAttribute("title", "Add patient");
-		model.addAttribute("titleForm", "Add patient");
+		model.addAttribute("title", "New patient");
+		model.addAttribute("titleForm", "New patient");
 		model.addAttribute("titleButton", "Add");
 		return model;
 	}
