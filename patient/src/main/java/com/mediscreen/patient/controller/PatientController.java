@@ -58,10 +58,10 @@ public class PatientController {
 	 */
 	@GetMapping("/patient" + "/{id}")
 	public PatientDto getPatientById(@PathVariable Integer id) {
-		log.info("Call /patient, param : { id : " + id + "}");
+		log.info("Call /patient/{}",id);
 		PatientDto patientDto = PatientDto.convertToDto(patientDao.findById(id)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find patient")));
-		log.info("Response /patient  : " + patientDto);
+		log.info("Response /patient/{}  : {}",id,patientDto);
 		return patientDto;
 	}
 
@@ -78,26 +78,26 @@ public class PatientController {
 		List<PatientDto> patientDtoList = StreamSupport.stream(patientDao.findAll().spliterator(), false)
 				.map(patient -> PatientDto.convertToDto(patient))
 				.collect(Collectors.toList());
-		log.info("Response /patients  : " + patientDtoList);
+		log.info("Response /patients  : {}", patientDtoList);
 		return patientDtoList;
 	}
 
 	@PutMapping("/patient" + "/{id}")
 	public PatientDto updatePatient(@PathVariable Integer id,@Valid @RequestBody PatientDto patientDto,HttpServletResponse response) {
-		log.info("Call /patient, param : { id : " + id + ", patientdto : " + patientDto + "}");
+		log.info("Call /patient/{}, body : patientdto = {}",id,patientDto);
 		log.debug("Control : id");
 		PatientDto patientOrigine = PatientDto.convertToDto(patientDao.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find patient")));
 		log.debug("Control OK : id");
 		
 		if(!validatePatient(patientDto, response)) {
-			log.info("Response /patient  : " + patientOrigine);
+			log.info("Response /patient  : {}",patientOrigine);
 			return patientOrigine;
 		};
 		
 		Patient patient = PatientDto.convertToDomain(patientDto);
 		log.debug(patient.toString());
 		patientDto = PatientDto.convertToDto(patientDao.save(patient));
-		log.info("Response /patient  : " + patientDto);
+		log.info("Response /patient  : {}", patientDto);
 		return patientDto;
 	}
 	
@@ -112,7 +112,7 @@ public class PatientController {
 		Patient patient = PatientDto.convertToDomain(patientDto);
 		log.debug(patient.toString());
 		patientDto = PatientDto.convertToDto(patientDao.save(patient));
-		log.info("Response /patient/add  : " + patientDto);
+		log.info("Response /patient/add  : {}",patientDto);
 		response.setStatus(HttpServletResponse.SC_CREATED);
 		return patientDto;
 	}
