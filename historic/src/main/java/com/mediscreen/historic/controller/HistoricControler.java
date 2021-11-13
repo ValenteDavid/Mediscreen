@@ -25,7 +25,7 @@ public class HistoricControler {
 	private HistoricDao historicDao;
 
 	@GetMapping("/historic/{id}")
-	public HistoricDto getHistoricById(@PathVariable Integer id) {
+	public HistoricDto getHistoricById(@PathVariable String id) {
 		log.info("Call /historic/, param : { id : " + id + "}");
 		HistoricDto historicDto = HistoricDto.convertToDto(historicDao.findById(id)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find historic")));
@@ -42,5 +42,5 @@ public class HistoricControler {
 		log.info("Response /historic/list/{} : {}   ",patientId, historicDtoList);
 		return historicDtoList;
 	}
-
+	
 }

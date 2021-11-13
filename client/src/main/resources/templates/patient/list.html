@@ -40,7 +40,7 @@
 						<td th:text="${patient.address}"></td>
 						<td th:text="${patient.phone}"></td>
 						<td style="width: 5%" class="text-center">
-							<a href="#">
+							<a th:href="@{/historic/list/{patientId}(patientId=${patient.id})}">
 								<img src="/icon/historic.png" />
 							</a>
 						</td>

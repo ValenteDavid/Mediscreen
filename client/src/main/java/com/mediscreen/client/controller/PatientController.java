@@ -28,9 +28,9 @@ import com.mediscreen.client.proxies.PatientProxy;
  *
  */
 @Controller
-public class ClientController {
+public class PatientController {
 
-	private static final Logger log = LoggerFactory.getLogger(ClientController.class);
+	private static final Logger log = LoggerFactory.getLogger(PatientController.class);
 
 	/**
 	 * @see PatientProxy

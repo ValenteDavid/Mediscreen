@@ -3,14 +3,11 @@ package com.mediscreen.historic.controller.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.data.annotation.Id;
-
 import com.mediscreen.historic.domain.Historic;
 
 public class HistoricDto {
 
-	@Id
-	private Integer id;
+	private String id;
 	@NotNull
 	private Integer patientId;
 	@NotEmpty
@@ -19,18 +16,18 @@ public class HistoricDto {
 	public HistoricDto() {
 	}
 	
-	public HistoricDto(Integer id, @NotNull Integer patientId, @NotEmpty String note) {
+	public HistoricDto(String id, @NotNull Integer patientId, @NotEmpty String note) {
 		super();
 		this.id = id;
 		this.patientId = patientId;
 		this.note = note;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

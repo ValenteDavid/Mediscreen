@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.mediscreen.historic.domain.Historic;
 
-public interface HistoricDao extends MongoRepository<Historic, Integer> {
+public interface HistoricDao extends MongoRepository<Historic, String> {
 	
 	List<Historic> findByPatientId(Integer patientId);
 

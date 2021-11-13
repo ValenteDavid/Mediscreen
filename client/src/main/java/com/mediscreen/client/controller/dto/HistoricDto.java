@@ -1,24 +1,20 @@
-package com.mediscreen.historic.domain;
+package com.mediscreen.client.controller.dto;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-@Document(collection = "historic")
-public class Historic {
+public class HistoricDto {
 
-	@Id
 	private String id;
-	@Field(value = "patient_id")
+	@NotNull
 	private Integer patientId;
-	@Field(value = "note")
+	@NotEmpty
 	private String note;
-
-	public Historic() {
-		super();
+	
+	public HistoricDto() {
 	}
-
-	public Historic(String id, Integer patientId, String note) {
+	
+	public HistoricDto(String id, @NotNull Integer patientId, @NotEmpty String note) {
 		super();
 		this.id = id;
 		this.patientId = patientId;
@@ -51,7 +47,7 @@ public class Historic {
 
 	@Override
 	public String toString() {
-		return "Historic [id=" + id + ", patientId=" + patientId + ", note=" + note + "]";
+		return "HistoricDto [id=" + id + ", patientId=" + patientId + ", note=" + note + "]";
 	}
 
 }
