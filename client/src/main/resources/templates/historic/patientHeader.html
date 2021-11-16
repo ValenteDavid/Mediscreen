@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
+</head>
+<body>
+	<div th:fragment="patientHeader">
+		<div class="row border border-primary bg-info">
+			<div class="col-9">
+				<p th:utext="${patientDto.lastName + ' ' + patientDto.firstName + ' (' + patientDto.sex + ')'}"></p>
+				<p th:utext="${patientDto.dob}"></p>
+			</div>
+			<div class="col">
+				<p th:utext="${patientDto.address}"></p>
+			</div>
+			<div class="col">
+				<p th:utext="${patientDto.phone}"></p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

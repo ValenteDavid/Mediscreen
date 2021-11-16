@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title th:text="${title}"></title>
+<link rel="stylesheet" href="../../../css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container">
+
+		<header th:insert="header.html :: header">...</header>
+
+		<div th:insert="historic/patientHeader.html :: patientHeader">...</div>
+		<br>
+
+		<div class="row">
+			<form action="#" th:action="@{/historic/validate}" th:object="${historicDto}" method="POST" class="form-horizontal" style="width: 100%">
+				<div class="form-group">
+					<div class="col-12">
+						<textarea rows="5" th:field="*{note}" id="note" placeholder="note" class="form-control"></textarea>
+						<p class="text-danger" th:if="${#fields.hasErrors('note')}" th:errors="*{note}"></p>
+					</div>
+				</div>
+				    <br>
+				<div class="form-group">
+					<input type="hidden" th:value="*{id}" th:attr="name='id'">
+					<input type="hidden"  th:value="${patientDto.id}" th:attr="name='patientId'">
+					<div class="row justify-content-between">
+						<div class="col-6">
+							<a class="btn btn-primary btn-lg float-end" href="/historic/list">Cancel</a>
+						</div>
+						<div class="col-6">
+							<input class="btn btn-primary btn-lg" type="submit" th:value="${titleButton}">
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

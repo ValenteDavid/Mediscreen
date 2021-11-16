@@ -9,22 +9,15 @@
 	<div class="container">
 		<header th:insert="header.html :: header">...</header>
 
-		<div class="row">
-		<p th:utext="${patientDto.firstName}"></p>
-		<p th:utext="${patientDto.lastName}"></p>
-		<p th:utext="${patientDto.dob}"></p>
-		<p th:utext="${patientDto.sex}"></p>
-		<p th:utext="${patientDto.address}"></p>
-		<p th:utext="${patientDtophone}"></p>
-		
-		</div>
+		<div th:insert="historic/patientHeader.html :: patientHeader">...</div>
+		<br>
 		<div class="row justify-content-between">
 			<div class="col-3">
 				<a href="#" class="btn btn-primary btn-sm">Generate the report</a>
 			</div>
 			<div class="col-3 ">
-                <a href="#" class="btn btn-primary btn-sm float-end" >Add a new note</a>
-            </div>
+				<a href="#" class="btn btn-primary btn-sm float-end">Add a new note</a>
+			</div>
 		</div>
 		<div class="row">
 			<table class="table table-bordered">
@@ -38,7 +31,7 @@
 					<tr th:each="historic: ${historics}">
 						<td th:text="${historic.note}"></td>
 						<td class="text-center">
-							<a href="#">
+							<a th:href="@{/historic/update/{patientId}/{id}(patientId=${patientDto.id},id=${historic.id})}">
 								<img src="/icon/edit.png" />
 							</a>
 						</td>

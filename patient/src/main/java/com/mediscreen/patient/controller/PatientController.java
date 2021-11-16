@@ -82,6 +82,13 @@ public class PatientController {
 		return patientDtoList;
 	}
 
+	/**
+	 * Update patient
+	 * @param id
+	 * @param patientDto
+	 * @param response
+	 * @return patient update
+	 */
 	@PutMapping("/patient" + "/{id}")
 	public PatientDto updatePatient(@PathVariable Integer id,@Valid @RequestBody PatientDto patientDto,HttpServletResponse response) {
 		log.info("Call /patient/{}, body : patientdto = {}",id,patientDto);
@@ -101,6 +108,14 @@ public class PatientController {
 		return patientDto;
 	}
 	
+	/**
+	 * Add patient
+	 * @param patientDto
+	 * @param response
+	 * @param model
+	 * @param result
+	 * @return patient save
+	 */
 	@PostMapping("/patient/add")
 	public PatientDto addPatient(@Valid @RequestBody PatientDto patientDto,HttpServletResponse response,Model model,BindingResult result) {
 		log.info("Call /patient/add");

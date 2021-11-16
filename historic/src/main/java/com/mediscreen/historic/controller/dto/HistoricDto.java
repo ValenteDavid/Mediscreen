@@ -1,5 +1,6 @@
 package com.mediscreen.historic.controller.dto;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -54,6 +55,10 @@ public class HistoricDto {
 
 	public static HistoricDto convertToDto(Historic historic) {
 		return new HistoricDto(historic.getId(),historic.getPatientId(),historic.getNote());
+	}
+
+	public static Historic convertToDomain(HistoricDto historicDto) {
+		return new Historic(historicDto.getId(), historicDto.getPatientId(), historicDto.getNote());
 	}
 	
 }

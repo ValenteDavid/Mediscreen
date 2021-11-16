@@ -69,11 +69,12 @@ public class PatientController {
 		log.info("Return /patient/update/" + id + " : patient/add_update ");
 		return "patient/add_update";
 	}
-	
+
 	/*
 	 * Show UI add patient
 	 * 
 	 * @param id : patient id
+	 * 
 	 * @return UI and attribute
 	 */
 	@GetMapping("/patient/add")
@@ -112,20 +113,26 @@ public class PatientController {
 
 		if (!result.hasErrors()) {
 			try {
-				log.debug("Send add");
-				patientProxy.addPatient(patientDto);
-				return "redirect:/patient/list";
-			}
-			catch (Exception e) {
-				log.warn("Add patient return error");
+				if (patientDto.getId() != null) {
+					log.debug("Send update");
+					patientProxy.updatePatient(patientDto.getId(),patientDto);
+					log.info("Return /patient/validate : " + "redirect:/patient/list");
+					return "redirect:/patient/list";
+				} else {
+					log.debug("Send add");
+					patientProxy.addPatient(patientDto);
+					log.info("Return /patient/validate : " + "redirect:/patient/list");
+					return "redirect:/patient/list";
+				}
+			} catch (Exception e) {
+				log.warn("Control Patient ERROR");
 				return redirectSaveUpdate(patientDto, model);
 			}
 		} else {
-			log.info("Return /patient/validate : " + "redirect:/patient/" + patientDto.getId());
 			return redirectSaveUpdate(patientDto, model);
 		}
 	}
-	
+
 	private Model addAttribute(Model model) {
 		model.addAttribute("title", "New patient");
 		model.addAttribute("titleForm", "New patient");
@@ -143,9 +150,11 @@ public class PatientController {
 	private String redirectSaveUpdate(PatientDto patientDto, Model model) {
 		if (patientDto.getId() != null) {
 			updateAttribute(model);
+			log.info("Return /patient/validate : " + "patient/add_update");
 			return "patient/add_update";
 		} else {
 			addAttribute(model);
+			log.info("Return /patient/validate : " + "patient/add_update");
 			return "patient/add_update";
 		}
 	}

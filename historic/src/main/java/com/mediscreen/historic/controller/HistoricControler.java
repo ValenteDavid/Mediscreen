@@ -4,17 +4,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.mediscreen.historic.controller.dto.HistoricDto;
 import com.mediscreen.historic.dao.HistoricDao;
+import com.mediscreen.historic.domain.Historic;
 
 @RestController
 public class HistoricControler {
@@ -43,4 +49,17 @@ public class HistoricControler {
 		return historicDtoList;
 	}
 	
+	@PutMapping("/historic" + "/{id}")
+	public HistoricDto updateHsitoric(@PathVariable String id,@Valid @RequestBody HistoricDto historicDto,HttpServletResponse response) {
+		log.info("Call /historic/{}, body : historicDto = {}",id,historicDto);
+		log.debug("Control : id");
+		HistoricDto historicOrigine = HistoricDto.convertToDto(historicDao.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find historic")));
+		log.debug("Control OK : id");
+		
+		Historic historic = HistoricDto.convertToDomain(historicDto);
+		log.debug(historic.toString());
+		historicDto = HistoricDto.convertToDto(historicDao.save(historic));
+		log.info("Response /historic  : {}", historicDto);
+		return historicDto;
+	}
 }
