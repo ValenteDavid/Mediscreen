@@ -27,7 +27,7 @@
 					<input type="hidden"  th:value="${patientDto.id}" th:attr="name='patientId'">
 					<div class="row justify-content-between">
 						<div class="col-6">
-							<a class="btn btn-primary btn-lg float-end" th:href="@{/historic/list/{patientid}(patientId=${patientDto.id})}">Cancel</a>
+							<a class="btn btn-primary btn-lg float-end" th:href="@{/historic/list/{patientId}(patientId=${patientDto.id})}">Cancel</a>
 						</div>
 						<div class="col-6">
 							<input class="btn btn-primary btn-lg" type="submit" th:value="${titleButton}">
