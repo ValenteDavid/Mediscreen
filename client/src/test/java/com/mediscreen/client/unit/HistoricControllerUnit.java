@@ -33,19 +33,38 @@ public class HistoricControllerUnit {
 	private PatientProxy patientProxy;
 
 	@Test
-	public void showPatientListTest() throws Exception {
+	public void showHistoricListTest() throws Exception {
+		String id = "61937e698bcc2a1d678ae0b8";
 		Integer patientId = 1;
+		when(patientProxy.getPatientById(patientId)).thenReturn(
+				new PatientDto(1, "", "", "", "M", "", ""));
+		HistoricDto historic = new HistoricDto(id, patientId, "note");
+		when(historicProxy.getHistoricById(id)).thenReturn(historic);
 		
-		PatientDto patientDto = new PatientDto(1,"firstName", "lastName", "2021-01-01","F","address","000-111-222");
-		when(patientProxy.getPatientById(patientId)).thenReturn(patientDto);
 		List<HistoricDto> historicList = new ArrayList<>();
-		historicList.add(new HistoricDto("1",patientId,"Lorem note"));
+		historicList.add(new HistoricDto(id, 1, "note"));
 		when(historicProxy.getHistoricByPatientId(patientId)).thenReturn(historicList);
-		
 		
 		mockMvc.perform(get("/historic/list/{0}", patientId))
 				.andExpect(model().attributeExists("patientDto"))
 				.andExpect(model().attributeExists("historics"))
 				.andExpect(status().isOk());
+	}
+	
+	@Test
+	public void showUpdateHistoricTest() throws Exception {
+		String id = "61937e698bcc2a1d678ae0b6";
+		Integer patientId = 1;
+		when(patientProxy.getPatientById(patientId)).thenReturn(
+				new PatientDto(1, "", "", "", "M", "", ""));
+		HistoricDto historic = new HistoricDto(id, patientId, "note");
+		when(historicProxy.getHistoricById(id)).thenReturn(historic);
+		
+		mockMvc.perform(get("/historic/update/{0}/{1}",patientId,id))
+		.andExpect(model().attribute("title","Edit historic"))
+		.andExpect(model().attribute("titleButton","Edit"))
+		.andExpect(model().attributeExists("patientDto"))
+		.andExpect(model().attributeExists("historicDto"))
+		.andExpect(status().isOk());
 	}
 }

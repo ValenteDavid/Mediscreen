@@ -18,11 +18,21 @@ public class HistoricControllerInteg {
 	private MockMvc mockMvc;
 
 	@Test
-	public void showPatientListTest() throws Exception {
+	public void showHistoricListTest() throws Exception {
 		Integer patientId = 1;
 		mockMvc.perform(get("/historic/list/{0}", patientId))
 				.andExpect(model().attributeExists("patientDto"))
 				.andExpect(model().attributeExists("historics"))
 				.andExpect(status().isOk());
+	}
+	
+	@Test
+	public void showUpdateHistoricTest() throws Exception {
+		mockMvc.perform(get("/historic/update/{0}/{1}",1,"61937e698bcc2a1d678ae0b6"))
+		.andExpect(model().attribute("title","Edit historic"))
+		.andExpect(model().attribute("titleButton","Edit"))
+		.andExpect(model().attributeExists("patientDto"))
+		.andExpect(model().attributeExists("historicDto"))
+		.andExpect(status().isOk());
 	}
 }

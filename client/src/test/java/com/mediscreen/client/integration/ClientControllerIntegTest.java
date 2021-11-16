@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ClientControllerIntegTest {
+	
 	@Autowired
 	private MockMvc mockMvc;
 	
@@ -35,8 +36,8 @@ public class ClientControllerIntegTest {
 	@Test
 	public void showAddPatientTest() throws Exception {
 		mockMvc.perform(get("/patient/add"))
-		.andExpect(model().attribute("title","Add patient"))
-		.andExpect(model().attribute("titleForm","Add patient"))
+		.andExpect(model().attribute("title","New patient"))
+		.andExpect(model().attribute("titleForm","New patient"))
 		.andExpect(model().attribute("titleButton","Add"))
 		.andExpect(status().isOk());
 	}

@@ -103,7 +103,7 @@ public class HistoricController {
 	}
 
 	private Model listAttribute(Model model, Integer patientId) {
-		model.addAttribute("", patientProxy.getPatientById(patientId));
+		model.addAttribute("patientDto", patientProxy.getPatientById(patientId));
 		model.addAttribute("historics", historicProxy.getHistoricByPatientId(patientId));
 		return model;
 	}
@@ -118,7 +118,7 @@ public class HistoricController {
 		model.addAttribute("title", "Edit historic");
 		model.addAttribute("titleButton", "Edit");
 
-		model.addAttribute("", patientProxy.getPatientById(patientId));
+		model.addAttribute("patientDto", patientProxy.getPatientById(patientId));
 		model.addAttribute("historicDto", historicProxy.getHistoricById(id));
 		return model;
 	}
