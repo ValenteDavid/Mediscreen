@@ -29,7 +29,7 @@ public interface HistoricProxy {
 	@GetMapping("/historic/list/{patientId}")
 	List<HistoricDto> getHistoricByPatientId(@PathVariable Integer patientId);
 	
-	@PutMapping("/historic" + "/{id}")
+	@PutMapping("/historic/update/{id}")
 	HistoricDto updateHsitoric(@PathVariable String id,@Valid @RequestBody HistoricDto historicDto);
 	
 	@PostMapping("/historic/add")

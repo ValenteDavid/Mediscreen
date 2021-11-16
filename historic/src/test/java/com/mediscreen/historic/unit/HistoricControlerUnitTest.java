@@ -85,7 +85,7 @@ public class HistoricControlerUnitTest {
 
 		String body = new ObjectMapper().writeValueAsString(historicDto);
 
-		mockMvc.perform(put("/historic/{0}", id)
+		mockMvc.perform(put("/historic/update/{0}", id)
 				.content(body)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
@@ -104,7 +104,7 @@ public class HistoricControlerUnitTest {
 
 		String body = new ObjectMapper().writeValueAsString(historicDto);
 
-		mockMvc.perform(put("/historic/{0}", id)
+		mockMvc.perform(put("/historic/update/{0}", id)
 				.content(body)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))

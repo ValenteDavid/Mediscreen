@@ -53,7 +53,7 @@ public class HistoricControllerIntegTest {
 
 		String body = new ObjectMapper().writeValueAsString(historictDto);
 
-		mockMvc.perform(put("/historic/{0}", id)
+		mockMvc.perform(put("/historic/update/{0}", id)
 				.content(body)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))

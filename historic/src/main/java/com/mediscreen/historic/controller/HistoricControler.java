@@ -52,7 +52,7 @@ public class HistoricControler {
 		return historicDtoList;
 	}
 	
-	@PutMapping("/historic/{id}")
+	@PutMapping("/historic/update/{id}")
 	public HistoricDto updateHsitoric(@PathVariable String id,@Valid @RequestBody HistoricDto historicDto,HttpServletResponse response) {
 		log.info("Call /historic/{}, body : historicDto = {}",id,historicDto);
 		log.debug("Control : id");
