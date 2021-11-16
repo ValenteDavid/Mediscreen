@@ -4,6 +4,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -109,5 +110,34 @@ public class HistoricControlerUnitTest {
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isBadRequest());
 	}
+	
+	@Test
+	public void addHistoricTest_isOk() throws Exception {
+		Historic historic = new Historic(null, 2, "NOTENOTENOTE");
+		HistoricDto historicDto = HistoricDto.convertToDto(historic);
+		when(historicDao.save(any())).thenReturn(historic);
 
+		String body = new ObjectMapper().writeValueAsString(historicDto);
+
+		mockMvc.perform(post("/historic/add")
+				.content(body)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isCreated());
+	}
+	
+	@Test
+	public void addHistoricTest_isEmptyNote() throws Exception {
+		Historic historic = new Historic(null, 2, "");
+		HistoricDto historicDto = HistoricDto.convertToDto(historic);
+		when(historicDao.save(any())).thenReturn(historic);
+
+		String body = new ObjectMapper().writeValueAsString(historicDto);
+
+		mockMvc.perform(post("/historic/add")
+				.content(body)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isBadRequest());
+	}
 }

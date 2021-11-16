@@ -11,8 +11,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,4 +65,26 @@ public class HistoricControler {
 		log.info("Response /historic  : {}", historicDto);
 		return historicDto;
 	}
+	
+	
+	/**
+	 * Add historic
+	 * @param historicDto
+	 * @param response
+	 * @param model
+	 * @param result
+	 * @return historic save
+	 */
+	@PostMapping("/historic/add")
+	public HistoricDto addHistoric(@Valid @RequestBody HistoricDto historicDto,HttpServletResponse response,Model model,BindingResult result) {
+		log.info("Call /historic/add");
+		
+		Historic historic = HistoricDto.convertToDomain(historicDto);
+		log.debug(historic.toString());
+		historicDto = HistoricDto.convertToDto(historicDao.save(historic));
+		log.info("Response /patient/add  : {}",historicDto);
+		response.setStatus(HttpServletResponse.SC_CREATED);
+		return historicDto;
+	}
+	
 }

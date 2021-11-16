@@ -8,7 +8,7 @@ public class HistoricDto {
 	private String id;
 	@NotNull
 	private Integer patientId;
-	@NotEmpty
+	@NotEmpty(message = "The note cannot be empty")
 	private String note;
 	
 	public HistoricDto() {

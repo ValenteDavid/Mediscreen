@@ -35,4 +35,14 @@ public class HistoricControllerInteg {
 		.andExpect(model().attributeExists("historicDto"))
 		.andExpect(status().isOk());
 	}
+	
+	@Test
+	public void showAddHistoricTest() throws Exception {
+		mockMvc.perform(get("/historic/add/{0}",1))
+		.andExpect(model().attribute("title","New historic"))
+		.andExpect(model().attribute("titleButton","Add"))
+		.andExpect(model().attributeExists("patientDto"))
+		.andExpect(model().attributeExists("historicDto"))
+		.andExpect(status().isOk());
+	}
 }

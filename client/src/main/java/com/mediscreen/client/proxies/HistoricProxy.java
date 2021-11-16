@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -30,5 +31,8 @@ public interface HistoricProxy {
 	
 	@PutMapping("/historic" + "/{id}")
 	HistoricDto updateHsitoric(@PathVariable String id,@Valid @RequestBody HistoricDto historicDto);
+	
+	@PostMapping("/historic/add")
+	HistoricDto addHistoric(@Valid @RequestBody HistoricDto historicDto);
 	
 }

@@ -2,6 +2,7 @@ package com.mediscreen.client.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -62,8 +63,25 @@ public class HistoricController {
 			HttpServletRequest httpServletRequest) {
 		log.info("Call /historic/update/" + id);
 		updateAttribute(model, patientId, id);
+		model.addAttribute("historicDto", historicProxy.getHistoricById(id));
 		log.debug("Attribute { historicDto : " + model.getAttribute("historicDto") + " }");
 		log.info("Return /historic/update/" + id + " : historic/add_update ");
+		return "historic/add_update";
+	}
+	
+	/**
+	 * Show UI add historic
+	 * 
+	 * @param id : historic id
+	 * @return UI and attribute
+	 */
+	@GetMapping("/historic/add/{patientId}")
+	public String showAddHistoric(@PathVariable Integer patientId,Model model, HttpServletRequest httpServletRequest) {
+		log.info("Call /historic/add");
+		addAttribute(model,patientId);
+		model.addAttribute("historicDto", new HistoricDto());
+		log.debug("Attribute { historicDto : " + model.getAttribute("historicDto") + " }");
+		log.info("Return /historic/add" + " : patient/add_update ");
 		return "historic/add_update";
 	}
 
@@ -88,17 +106,19 @@ public class HistoricController {
 				if (historicDto.getId() != null) {
 					log.debug("Send update");
 					historicProxy.updateHsitoric(historicDto.getId(), historicDto);
-					return "redirect:/historic/list/" + patientId;
 				} else {
-					// TODO Add
-					return null;
+					log.debug("Send save");
+					historicProxy.addHistoric(historicDto);
 				}
+				log.info("Return /historic/validate : " + "redirect:/historic/list/{}",patientId);
+				return "redirect:/historic/list/" + patientId;
 			} catch (Exception e) {
 				log.warn("Control Historic ERROR");
-				return redirectSaveUpdate(historicDto, model, null, historicDto.getId());
+				return redirectSaveUpdate(historicDto, model, patientId, historicDto.getId());
 			}
 		} else {
-			return redirectSaveUpdate(historicDto, model, null, historicDto.getId());
+			log.debug("Error : {}",result.getAllErrors().stream().map(Object::toString).collect(Collectors.joining(",")));
+			return redirectSaveUpdate(historicDto, model, patientId, historicDto.getId());
 		}
 	}
 
@@ -108,18 +128,18 @@ public class HistoricController {
 		return model;
 	}
 
-	private Model addAttribute(Model model) {
+	private Model addAttribute(Model model,Integer patientId) {
 		model.addAttribute("title", "New historic");
 		model.addAttribute("titleButton", "Add");
+		model.addAttribute("patientDto", patientProxy.getPatientById(patientId));
+		
 		return model;
 	}
 
 	private Model updateAttribute(Model model, Integer patientId, String id) {
 		model.addAttribute("title", "Edit historic");
 		model.addAttribute("titleButton", "Edit");
-
 		model.addAttribute("patientDto", patientProxy.getPatientById(patientId));
-		model.addAttribute("historicDto", historicProxy.getHistoricById(id));
 		return model;
 	}
 
@@ -129,7 +149,7 @@ public class HistoricController {
 			log.info("Return /historic/validate : " + "historic/add_update");
 			return "historic/add_update";
 		} else {
-			addAttribute(model);
+			addAttribute(model,patientId);
 			log.info("Return /historic/validate : " + "historic/add_update");
 			return "historic/add_update";
 		}

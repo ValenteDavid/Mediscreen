@@ -67,4 +67,12 @@ public class HistoricControllerUnit {
 		.andExpect(model().attributeExists("historicDto"))
 		.andExpect(status().isOk());
 	}
+	
+	@Test
+	public void showAddHistoricTest() throws Exception {
+		Integer patientId = 1;
+		when(patientProxy.getPatientById(patientId)).thenReturn(new PatientDto());
+		mockMvc.perform(get("/historic/add/{0}",patientId))
+		.andExpect(status().isOk());
+	}
 }

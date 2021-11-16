@@ -3,6 +3,7 @@ package com.mediscreen.client.controller;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -116,19 +117,18 @@ public class PatientController {
 				if (patientDto.getId() != null) {
 					log.debug("Send update");
 					patientProxy.updatePatient(patientDto.getId(),patientDto);
-					log.info("Return /patient/validate : " + "redirect:/patient/list");
-					return "redirect:/patient/list";
 				} else {
 					log.debug("Send add");
 					patientProxy.addPatient(patientDto);
-					log.info("Return /patient/validate : " + "redirect:/patient/list");
-					return "redirect:/patient/list";
 				}
+				log.info("Return /patient/validate : " + "redirect:/patient/list");
+				return "redirect:/patient/list";
 			} catch (Exception e) {
 				log.warn("Control Patient ERROR");
 				return redirectSaveUpdate(patientDto, model);
 			}
 		} else {
+			log.debug("Error : {}",result.getAllErrors().stream().map(Object::toString).collect(Collectors.joining(",")));
 			return redirectSaveUpdate(patientDto, model);
 		}
 	}

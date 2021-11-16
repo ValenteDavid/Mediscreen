@@ -2,6 +2,7 @@ package com.mediscreen.historic.integration;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -59,5 +60,20 @@ public class HistoricControllerIntegTest {
 				.andExpect(status().isOk());
 	}
 	
+	@Test
+	public void addHistoricTest_isOk() throws Exception {
+		String id = "61937e698bcc2a1d678ae0b9";
+
+		Historic historic = new Historic(id, 2, "NOTENOTENOTE");
+		HistoricDto historictDto = HistoricDto.convertToDto(historic);
+
+		String body = new ObjectMapper().writeValueAsString(historictDto);
+
+		mockMvc.perform(post("/historic/add")
+				.content(body)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isCreated());
+	}
 	
 }
