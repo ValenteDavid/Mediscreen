@@ -79,7 +79,7 @@ public class HistoricController {
 	public String showAddHistoric(@PathVariable Integer patientId,Model model, HttpServletRequest httpServletRequest) {
 		log.info("Call /historic/add");
 		addAttribute(model,patientId);
-		model.addAttribute("historicDto", new HistoricDto());
+		model.addAttribute("historicDto", new HistoricDto(null,patientId,null));
 		log.debug("Attribute { historicDto : " + model.getAttribute("historicDto") + " }");
 		log.info("Return /historic/add" + " : patient/add_update ");
 		return "historic/add_update";

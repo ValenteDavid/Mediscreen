@@ -1,0 +1,83 @@
+[{
+	"patient_id": "10",
+	"note": "Le patient déclare qu'il « se sent très bien »\r\nPoids égal ou inférieur au poids recommandé"
+}, {
+	"patient_id": "10",
+	"note": "Le patient déclare qu'il se sent fatigué pendant la journée\r\nIl se plaint également de douleurs musculaires\r\nTests de laboratoire indiquant une microalbumine élevée"
+}, {
+	"patient_id": "10",
+	"note": "Le patient déclare qu'il ne se sent pas si fatigué que ça\r\nFumeur, il a arrêté dans les 12 mois précédents\r\nTests de laboratoire indiquant que les anticorps sont élevés"
+}, {
+	"patient_id": "11",
+	"note": "Le patient déclare qu'il ressent beaucoup de stress au travail\r\nIl se plaint également que son audition est anormale dernièrement"
+}, {
+	"patient_id": "11",
+	"note": "Le patient déclare avoir fait une réaction aux médicaments au cours des 3 derniers mois\r\nIl remarque également que son audition continue d'être anormale"
+}, {
+	"patient_id": "11",
+	"note": "Tests de laboratoire indiquant une microalbumine élevée"
+}, {
+	"patient_id": "11",
+	"note": "Le patient déclare que tout semble aller bien\r\nLe laboratoire rapporte que l'hémoglobine A1C dépasse le niveau recommandé\r\nLe patient déclare qu’il fume depuis longtemps"
+}, {
+	"patient_id": "12",
+	"note": "Le patient déclare qu'il fume depuis peu"
+}, {
+	"patient_id": "12",
+	"note": "Tests de laboratoire indiquant une microalbumine élevée"
+}, {
+	"patient_id": "13",
+	"note": "Le patient déclare qu'il est fumeur et qu'il a cessé de fumer l'année dernière\r\nIl se plaint également de crises d’apnée respiratoire anormales\r\nTests de laboratoire indiquant un taux de cholestérol LDL élevé"
+}, {
+	"patient_id": "13",
+	"note": "Le patient déclare qu'il a mal au dos lorsqu'il reste assis pendant longtemps"
+}, {
+	"patient_id": "13",
+	"note": "Le patient déclare avoir commencé à fumer depuis peu\r\nHémoglobine A1C supérieure au niveau recommandé"
+}, {
+	"patient_id": "14",
+	"note": "Le patient déclare avoir des douleurs au cou occasionnellement\r\nLe patient remarque également que certains aliments ont un goût différent\r\nRéaction apparente aux médicaments\r\nPoids corporel supérieur au poids recommandé"
+}, {
+	"patient_id": "14",
+	"note": "Le patient déclare avoir eu plusieurs épisodes de vertige depuis la dernière visite.\r\nTaille incluse dans la fourchette concernée"
+}, {
+	"patient_id": "14",
+	"note": "Le patient déclare qu'il souffre encore de douleurs cervicales occasionnelles\r\nTests de laboratoire indiquant une microalbumine élevée\r\nFumeur, il a arrêté dans les 12 mois précédents"
+}, {
+	"patient_id": "14",
+	"note": "Le patient déclare avoir eu plusieurs épisodes de vertige depuis la dernière visite.\r\nTests de laboratoire indiquant que les anticorps sont élevés"
+}, {
+	"patient_id": "15",
+	"note": "Le patient déclare qu'il se sent bien\r\nPoids corporel supérieur au poids recommandé"
+}, {
+	"patient_id": "15",
+	"note": "Le patient déclare qu'il se sent bien"
+
+}, {
+	"patient_id": "16",
+	"note": "Le patient déclare qu'il se réveille souvent avec une raideur articulaire\r\nIl se plaint également de difficultés pour s’endormir\r\nPoids corporel supérieur au poids recommandé\r\nTests de laboratoire indiquant un taux de cholestérol LDL élevé"
+}, {
+	"patient_id": "17",
+	"note": "Les tests de laboratoire indiquent que les anticorps sont élevés\r\nHémoglobine A1C supérieure au niveau recommandé"
+}, {
+	"patient_id": "18",
+	"note": "Le patient déclare avoir de la difficulté à se concentrer sur ses devoirs scolaires\r\nHémoglobine A1C supérieure au niveau recommandé"
+}, {
+	"patient_id": "18",
+	"note": "Le patient déclare qu'il s’impatiente facilement en cas d’attente prolongée\r\nIl signale également que les produits du distributeur automatique ne sont pas bons\r\nTests de laboratoire signalant des taux anormaux de cellules sanguines"
+}, {
+	"patient_id": "18",
+	"note": "Le patient signale qu'il est facilement irrité par des broutilles\r\nIl déclare également que l'aspirateur des voisins fait trop de bruit\r\nTests de laboratoire indiquant que les anticorps sont élevés"
+}, {
+	"patient_id": "19",
+	"note": "Le patient déclare qu'il n'a aucun problème"
+}, {
+	"patient_id": "19",
+	"note": "Le patient déclare qu'il n'a aucun problème\r\nTaille incluse dans la fourchette concernée\r\nHémoglobine A1C supérieure au niveau recommandé"
+}, {
+	"patient_id": "19",
+	"note": "Le patient déclare qu'il n'a aucun problème\r\nPoids corporel supérieur au poids recommandé\r\nLe patient a signalé plusieurs épisodes de vertige depuis sa dernière visite"
+}, {
+	"patient_id": "19",
+	"note": "Le patient déclare qu'il n'a aucun problème\r\nTests de laboratoire indiquant une microalbumine élevée"
+}]
