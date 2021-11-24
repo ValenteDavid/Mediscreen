@@ -13,7 +13,7 @@
 		<br>
 		<div class="row justify-content-between">
 			<div class="col-3">
-				<a  href="#" class="btn btn-primary btn-sm">Generate the report</a>
+				<a th:href="@{/generateReport/{patientId}(patientId=${patientDto.id})}" class="btn btn-primary btn-sm">Generate the report</a>
 			</div>
 			<div class="col-3 ">
 				<a th:href="@{/historic/add/{patientId}(patientId=${patientDto.id})}" class="btn btn-primary btn-sm float-end">Add a new note</a>
