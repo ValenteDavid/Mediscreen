@@ -10,7 +10,7 @@ public class Historic {
 	@Id
 	private String id;
 	@Field(value = "patient_id")
-	private Integer patientId;
+	private Integer patient_id;
 	@Field(value = "note")
 	private String note;
 
@@ -21,7 +21,7 @@ public class Historic {
 	public Historic(String id, Integer patientId, String note) {
 		super();
 		this.id = id;
-		this.patientId = patientId;
+		this.patient_id = patientId;
 		this.note = note;
 	}
 
@@ -34,11 +34,11 @@ public class Historic {
 	}
 
 	public Integer getPatientId() {
-		return patientId;
+		return patient_id;
 	}
 
 	public void setPatientId(Integer patientId) {
-		this.patientId = patientId;
+		this.patient_id = patientId;
 	}
 
 	public String getNote() {
@@ -51,7 +51,7 @@ public class Historic {
 
 	@Override
 	public String toString() {
-		return "Historic [id=" + id + ", patientId=" + patientId + ", note=" + note + "]";
+		return "Historic [id=" + id + ", patientId=" + patient_id + ", note=" + note + "]";
 	}
 
 }

@@ -42,7 +42,7 @@ public class HistoricApplication implements CommandLineRunner {
 		
 		
 		BufferedReader br = new BufferedReader(new FileReader(ResourceUtils.getFile("classpath:HistoricData.json")));
-        Type type = new TypeToken<List<Historic>>() {
+		Type type = new TypeToken<List<Historic>>() {
         }.getType();
         List<Historic> inpList = new Gson().fromJson(br, type);
         historicDao.saveAll(inpList);
