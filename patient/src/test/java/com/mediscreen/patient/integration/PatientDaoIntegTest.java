@@ -38,7 +38,7 @@ public class PatientDaoIntegTest {
 	public void findaAllTest() {
 		List<Patient> patient = StreamSupport.stream(patientDao.findAll().spliterator(), false)
 				.collect(Collectors.toList());
-		assertEquals(4, patient.size());
+		assertEquals(14, patient.size());
 	}
 	
 	@Test 

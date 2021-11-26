@@ -49,7 +49,7 @@ public class PatientControllerIntegTest {
 	public void getPatientAllTest() throws Exception {
 		mockMvc.perform(get("/patient/list"))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$", hasSize(4)));
+				.andExpect(jsonPath("$", hasSize(14)));
 	}
 
 	@Test
