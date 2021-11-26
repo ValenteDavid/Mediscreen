@@ -21,6 +21,11 @@ import com.mediscreen.report.proxies.HistoricProxy;
 import com.mediscreen.report.proxies.PatientProxy;
 import com.mediscreen.report.service.ReportService;
 
+/**
+ * Report Controller
+ * @author David
+ *
+ */
 @RestController
 public class ReportController {
 
@@ -53,8 +58,11 @@ public class ReportController {
 			age = repportService.age(sdf.parse(patientDto.getDob()));
 			log.debug("Control OK : dob");
 		} catch (ParseException e) {
-			log.debug("Control ERROR : dob");
 			log.warn("Control ERROR : dob format");
+			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+		}
+		catch (IllegalArgumentException e) {
+			log.warn("Control ERROR : {}",e.getMessage());
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
 
@@ -64,7 +72,9 @@ public class ReportController {
 				.collect(Collectors.toList());
 		log.debug("historicListContent = " +historicListContent);
 
-		String diabeteRisk = repportService.diabetesRisk(historicListContent, patientDto.getSex(), age)
+		int occurenceNumber = repportService.occurence(historicListContent);
+		
+		String diabeteRisk = repportService.diabetesRisk(occurenceNumber, patientDto.getSex(), age)
 				.getDescription();
 		String responseContent = String.format("Patient: %s %s (age %d) diabetes assessment is: %s",
 				patientDto.getFirstName(),
